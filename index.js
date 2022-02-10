@@ -1,8 +1,11 @@
 var inquirer = require('inquirer');
 
-
-
-const sorter = pdata => console.log(pdata)
+const sorter = pdata => {
+  switch (pdata.todo) {
+    case 'View All Employees':
+      console.log('hey')
+  }
+}
 
 inquirer.prompt([
 {
