@@ -1,6 +1,7 @@
-var inquirer = require('inquirer');
+const inquirer = require('inquirer');
 const mysql = require("mysql2");
 const { showAllEmployees, showAllDepartments, showAllRoles }= require('./utils/displayfuctions.js')
+const { addDepartment } = require('./utils/addfunctions.js')
 const db = require('./db/connection')
 
 db.connect(function (err) {

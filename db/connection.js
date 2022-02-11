@@ -9,4 +9,6 @@ const db = mysql.createConnection({
   database: 'company'
 });
 
+
+
 module.exports = db;
