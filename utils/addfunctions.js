@@ -1,9 +1,8 @@
 const db = require('../db/connection')
 const inquirer = require('inquirer');
+const {loop} = require('../index.js');
 
 function insertDepartment(data) {
-    console.log(data.new_department)
-
 
     const sql = `INSERT INTO department (title) VALUES (?)`;
       const params = data.new_department;
@@ -16,6 +15,7 @@ function insertDepartment(data) {
               message: 'success'
           });
       });
+
 }
 
 function addDepartment() {
@@ -30,11 +30,11 @@ function addDepartment() {
 
 
 function insertRole(data) {
-    console.log(data.new_role)
+    console.log(data)
 
 
-    const sql = `INSERT INTO department (title) VALUES (?)`;
-      const params = data.new_department;
+    const sql = `INSERT INTO roles (title, salary, department_id) VALUES (?,?,?)`;
+      const params = [data.new_role, data.salary, data.department_id]
       db.query(sql, params, (err, result) => {
           if (err) {
               res.status(400).json({ error: err.message });
@@ -52,10 +52,62 @@ function addRole() {
           type: 'input',
           name: 'new_role',
           message: "Enter The New Role's Name",
-        }
-      ]).then(insertDepartment)
+        },
+        {
+            type: 'input',
+            name: 'salary',
+            message: "Enter The New Role's Salary",
+          },
+          {
+            type: 'input',
+            name: 'department_id',
+            message: "Enter The New Role's Department_id",
+          },s
+      ]).then(insertRole)
+}
+
+function insertEmployee(data) {
+    console.log(data)
+
+
+    const sql = `INSERT INTO roles (title, salary, department_id) VALUES (?,?,?,?)`;
+      const params = [data.first_name, data.last_name, data.role, data.manager_id]
+      db.query(sql, params, (err, result) => {
+          if (err) {
+              res.status(400).json({ error: err.message });
+              return;
+          }
+          console.log({
+              message: 'success'
+          });
+      });
+}
+
+function addEmployee() {
+    inquirer.prompt([
+        {
+          type: 'input',
+          name: 'first_name',
+          message: "Enter The New Employees's First Name:",
+        },
+        {
+            type: 'input',
+            name: 'last_name',
+            message: "Enter The New Employees's Last Name:",
+          },
+        {
+            type: 'input',
+            name: 'role',
+            message: "Enter The New Employees's Role ID",
+          },
+          {
+            type: 'input',
+            name: 'manager_id',
+            message: "Enter The New Employee's Manager ID",
+          },
+      ]).then(insertEmployee)
 }
 
 
 
-module.exports = {addDepartment}
+module.exports = {addDepartment, addRole, addEmployee}

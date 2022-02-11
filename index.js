@@ -1,7 +1,6 @@
 const inquirer = require('inquirer');
-const mysql = require("mysql2");
 const { showAllEmployees, showAllDepartments, showAllRoles }= require('./utils/displayfuctions.js')
-const { addDepartment } = require('./utils/addfunctions.js')
+const { addDepartment, addRole, addEmployee } = require('./utils/addfunctions.js')
 const db = require('./db/connection')
 
 db.connect(function (err) {
@@ -18,13 +17,13 @@ const sorter = pdata => {
 
     case 'Add A Department': addDepartment(); break;
     case 'Add A Role': addRole(); break;
-    case 'Add An Employee': addDepartment(); break;
+    case 'Add An Employee': addEmployee(); break;
 
     case 'Update An Employee Role': updateEmployeeRole(); break;
   }
 }
 
-const startQuestion = () => {
+function startQuestion() {
   inquirer.prompt([
     {
       type: 'list',
@@ -35,4 +34,8 @@ const startQuestion = () => {
   ]).then(data => sorter(data))
 }
 
-module.exports = {startQuestion}
+function loop() {
+  startQuestion()
+}
+
+module.exports = {loop};
