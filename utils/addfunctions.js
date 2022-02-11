@@ -1,9 +1,10 @@
 const db = require('../db/connection')
 const inquirer = require('inquirer');
-const {loop} = require('../index.js');
+const { showAllEmployees, showAllDepartments, showAllRoles }= require('./displayfuctions.js')
+// const {startQuestion} = require('../index')
+
 
 function insertDepartment(data) {
-
     const sql = `INSERT INTO department (title) VALUES (?)`;
       const params = data.new_department;
       db.query(sql, params, (err, result) => {
@@ -11,11 +12,9 @@ function insertDepartment(data) {
               res.status(400).json({ error: err.message });
               return;
           }
-          console.log({
-              message: 'success'
-          });
+          showAllDepartments();
       });
-
+    
 }
 
 function addDepartment() {

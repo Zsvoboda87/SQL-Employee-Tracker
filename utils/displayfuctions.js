@@ -1,5 +1,5 @@
 const db = require('../db/connection')
-const {startQuestion} = require('../index')
+
 
 function showAllEmployees() {
   db.query("SELECT * FROM employees", (err, data) => {
@@ -8,6 +8,7 @@ function showAllEmployees() {
     console.table(data)
     console.log("\n")
   })
+
 }
 
 function showAllRoles() {

@@ -1,6 +1,7 @@
 const inquirer = require('inquirer');
 const { showAllEmployees, showAllDepartments, showAllRoles }= require('./utils/displayfuctions.js')
 const { addDepartment, addRole, addEmployee } = require('./utils/addfunctions.js')
+const {updateEmployee} =require('./utils/updatefunctions')
 const db = require('./db/connection')
 
 db.connect(function (err) {
@@ -11,7 +12,7 @@ db.connect(function (err) {
 
 const sorter = pdata => {
   switch (pdata.todo) {
-    case 'View All Departments': showAllDepartments(); break;
+    case 'View All Departments': showAllDepartments();break;
     case 'View All Roles': showAllRoles(); break;
     case 'View All Employees': showAllEmployees(); break;
 
@@ -19,7 +20,7 @@ const sorter = pdata => {
     case 'Add A Role': addRole(); break;
     case 'Add An Employee': addEmployee(); break;
 
-    case 'Update An Employee Role': updateEmployeeRole(); break;
+    case 'Update An Employee Role': updateEmployee(); break;
   }
 }
 
@@ -32,10 +33,6 @@ function startQuestion() {
       choices: ['View All Departments', 'View All Roles', 'View All Employees', 'Add A Department', 'Add A Role', 'Add An Employee', 'Update An Employee Role']
     }
   ]).then(data => sorter(data))
-}
+};
 
-function loop() {
-  startQuestion()
-}
-
-module.exports = {loop};
+// module.exports = {startQuestion};

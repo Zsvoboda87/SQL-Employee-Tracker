@@ -63,9 +63,9 @@ VALUES
 -- SELECT * FROM roles;
 -- SELECT * FROM department;
 
-SELECT * FROM employees
-LEFT JOIN roles ON employees.role_id = roles.id
-LEFT JOIN department ON roles.department_id = department.id;
+-- SELECT * FROM employees
+-- LEFT JOIN roles ON employees.role_id = roles.id
+-- LEFT JOIN department ON roles.department_id = department.id;
 
 SELECT e.id
   , e.first_name
@@ -76,3 +76,10 @@ SELECT e.id
 FROM employees e
 LEFT JOIN roles r ON e.role_id = r.id
 LEFT JOIN department d ON r.department_id = d.id;
+
+-- UPDATE employees 
+-- SET first_name = ?
+-- SET last_name = ?
+-- SET role_id = ?
+-- SET manager_id =?
+-- WHERE id = ?;
