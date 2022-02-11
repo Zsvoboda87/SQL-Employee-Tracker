@@ -13,7 +13,7 @@ connection.connect(function (err) {
 })
 
 function start () {
-    connection.query("SELECT * FROM employees", (err, data)  => {
+    connection.query("SELECT * FROM roles", (err, data)  => {
         if (err) throw err;
 
         console.log("\n")
