@@ -66,3 +66,13 @@ VALUES
 SELECT * FROM employees
 LEFT JOIN roles ON employees.role_id = roles.id
 LEFT JOIN department ON roles.department_id = department.id;
+
+SELECT e.id
+  , e.first_name
+  , e.last_name
+  , r.title
+  , r.salary
+  , d.title
+FROM employees e
+LEFT JOIN roles r ON e.role_id = r.id
+LEFT JOIN department d ON r.department_id = d.id;

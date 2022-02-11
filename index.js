@@ -1,9 +1,10 @@
+const { response } = require('express');
 var inquirer = require('inquirer');
 
 const sorter = pdata => {
   switch (pdata.todo) {
     case 'View All Employees':
-      console.log('hey')
+      
   }
 }
 
