@@ -35,4 +35,4 @@ function startQuestion() {
   ]).then(data => sorter(data))
 };
 
-// module.exports = {startQuestion};
+module.exports = {startQuestion};

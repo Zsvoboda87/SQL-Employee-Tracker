@@ -1,4 +1,5 @@
 const db = require('../db/connection')
+const {startQuestion} = require('../index')
 
 
 function showAllEmployees() {
@@ -8,7 +9,7 @@ function showAllEmployees() {
     console.table(data)
     console.log("\n")
   })
-
+  // startQuestion();
 }
 
 function showAllRoles() {
