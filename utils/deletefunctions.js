@@ -23,7 +23,6 @@ function deleteEmployee() {
       ])
 }
 
-
 function removeRole(data) {
     const sql = `DELETE FROM roles WHERE id = ?`;
       const params = data.remove_role ;
@@ -46,4 +45,26 @@ function deleteRole() {
       ])
 }
 
-module.exports = {deleteEmployee, removeEmployee, deleteRole, removeRole}
+function removeDepartment(data) {
+    const sql = `DELETE FROM department WHERE id = ?`;
+      const params = data.remove_dept ;
+      
+      return db.promise().query(sql, params, (err, result) => {
+          if (err) {
+              console.log('error')
+          }
+      });
+   
+}
+
+function deleteDepartment() {
+    return inquirer.prompt([
+        {
+          type: 'input',
+          name: 'remove_dept',
+          message: 'Enter The Department ID to be Deleted',
+        }
+      ])
+}
+
+module.exports = {deleteEmployee, removeEmployee, deleteRole, removeRole, deleteDepartment, removeDepartment}
