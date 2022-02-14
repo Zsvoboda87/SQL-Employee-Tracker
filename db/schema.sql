@@ -67,15 +67,18 @@ VALUES
 -- LEFT JOIN roles ON employees.role_id = roles.id
 -- LEFT JOIN department ON roles.department_id = department.id;
 
-SELECT e.id
+SELECT 
+   d.title AS department
+  , CONCAT(employees.first_name, " ", employees.last_name) AS manager
+  , r.title
   , e.first_name
   , e.last_name
-  , r.title
-  , r.salary
-  , d.title
+  , e.id
 FROM employees e
 LEFT JOIN roles r ON e.role_id = r.id
-LEFT JOIN department d ON r.department_id = d.id;
+LEFT JOIN department d ON r.department_id = d.id
+LEFT JOIN employees ON e.manager_id = employees.id
+ORDER BY department;
 
 -- UPDATE employees 
 -- SET first_name = ?

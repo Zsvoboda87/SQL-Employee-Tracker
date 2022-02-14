@@ -3,7 +3,8 @@ const inquirer = require('inquirer');
 
 
 
-function insertDepartment(data) {
+
+function insertEmployeeUpdate(data) {
 
     const sql = `UPDATE employees 
                     SET first_name = ?,
@@ -14,20 +15,16 @@ function insertDepartment(data) {
 
     const params = [data.first_name, data.last_name, data.role, data.manager_id, data.update_id];
 
-    console.log(params)
-    db.query(sql, params, (err, result) => {
+    return db.query(sql, params, (err, result) => {
         if (err) {
            console.log('error')
             return;
         }
-        console.log({
-            message: 'success'
-        });
     });
 }
 
     function updateEmployee() {
-        inquirer.prompt([
+        return inquirer.prompt([
             {
                 type: 'input',
                 name: 'update_id',
@@ -53,7 +50,7 @@ function insertDepartment(data) {
                 name: 'manager_id',
                 message: "Enter The Employee's Manager ID",
             },
-        ]).then(insertDepartment)
+        ])
     }
 
-    module.exports = { updateEmployee };
+    module.exports = { updateEmployee, insertEmployeeUpdate };
