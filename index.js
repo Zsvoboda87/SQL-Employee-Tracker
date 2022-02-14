@@ -2,6 +2,7 @@ const inquirer = require('inquirer');
 const { showAllEmployees, showAllDepartments, showAllRoles, showEmployeeByManager, showEmployeeByDepartment }= require('./utils/displayfuctions.js')
 const { addDepartment, addRole, addEmployee, insertDepartment, insertRole, insertEmployee } = require('./utils/addfunctions.js')
 const {updateEmployee, insertEmployeeUpdate} =require('./utils/updatefunctions')
+const {deleteEmployee, removeEmployee, deleteRole, removeRole} = require('./utils/deletefunctions')
 const db = require('./db/connection')
 
 
@@ -23,9 +24,13 @@ const sorter = pdata => {
     case 'Add A Role': addRole().then(answer => {insertRole(answer); startQuestion()}) ; break;
     case 'Add An Employee': addEmployee().then(answer => {insertEmployee(answer); startQuestion()}) ; break;
 
-    case 'Update An Employee Role':
-      showAllEmployees().then(data => {console.table(data[0]); return '' })
-      .then( () => { updateEmployee().then(answer => {insertEmployeeUpdate(answer); startQuestion()})})
+    case 'Update An Employee Role': showAllEmployees().then(data => {console.table(data[0]); return '' })
+             .then( () => { updateEmployee().then(answer => {insertEmployeeUpdate(answer); startQuestion()})})
+
+    case 'Delete Employee': deleteEmployee().then(answer => {removeEmployee(answer); startQuestion()}) ; break;
+    case 'Delete Role': deleteRole().then(answer => {removeRole(answer); startQuestion()}) ; break;
+
+
   }
 }
 
@@ -35,7 +40,10 @@ function startQuestion() {
       type: 'list',
       name: 'todo',
       message: 'Select on option',
-      choices: ['View All Departments', 'View All Roles', 'View All Employees', 'View Employees by Department', 'View Employees by Manager', 'Add A Department', 'Add A Role', 'Add An Employee', 'Update An Employee Role']
+      choices: ['View All Departments', 'View All Roles', 'View All Employees', 'View Employees by Department', 'View Employees by Manager', 
+                'Add A Department', 'Add A Role', 'Add An Employee', 
+                'Update An Employee Role',
+                'Delete Employee']
     }
   ]).then(data => sorter(data))
 };
