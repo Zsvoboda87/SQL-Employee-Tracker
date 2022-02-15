@@ -53,4 +53,18 @@ function insertEmployeeUpdate(data) {
         ])
     }
 
-    module.exports = { updateEmployee, insertEmployeeUpdate };
+
+    
+
+    function viewDeptBudget() {
+
+        return db.promise().query(`
+        SELECT d.title, 
+        SUM(r.salary)
+        FROM employees e
+            JOIN roles r ON r.id = e.role_id
+            JOIN department d ON r.department_id = d.id
+        GROUP BY d.title;`)
+      }
+
+    module.exports = { updateEmployee, insertEmployeeUpdate, viewDeptBudget };
