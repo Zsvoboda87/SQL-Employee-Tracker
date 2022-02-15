@@ -51,11 +51,19 @@ function showEmployeeByManager() {
 }
 
 function showAllRoles() {
-  return db.promise().query("SELECT * FROM roles")
+  return db.promise().query(
+    `SELECT 
+      r. id
+      , r.title
+      , r.salary
+      , d.title AS department
+    FROM roles r
+    LEFT JOIN department d ON r.department_id = d.id
+    ORDER BY r.id;`)
 }
 
 function showAllDepartments() {
-  return db.promise().query("SELECT * FROM department")
+  return db.promise().query("SELECT * FROM department ")
 }
 
 

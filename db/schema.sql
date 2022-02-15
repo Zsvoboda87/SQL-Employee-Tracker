@@ -58,12 +58,12 @@ VALUES
   ('Octavia', 'Butler', 3, 2),
   ('Unica', 'Zurn', 4, 2);
 
-SELECT d.title, 
-        SUM(r.salary)
-FROM employees e
-    JOIN roles r ON r.id = e.role_id
-    JOIN department d ON r.department_id = d.id
-GROUP BY d.title;
+-- SELECT d.title, 
+--         SUM(r.salary)
+-- FROM employees e
+--     JOIN roles r ON r.id = e.role_id
+--     JOIN department d ON r.department_id = d.id
+-- GROUP BY d.title;
 
 
 -- SELECT * FROM employees;
@@ -74,19 +74,16 @@ GROUP BY d.title;
 -- LEFT JOIN roles ON employees.role_id = roles.id
 -- LEFT JOIN department ON roles.department_id = department.id;
 
--- SELECT 
---    d.title AS department
---   , CONCAT(employees.first_name, " ", employees.last_name) AS manager
---   , r.title
---   , r.salary
---   , e.first_name
---   , e.last_name
---   , e.id
--- FROM employees e
--- LEFT JOIN roles r ON e.role_id = r.id
--- LEFT JOIN department d ON r.department_id = d.id
--- LEFT JOIN employees ON e.manager_id = employees.id
--- ORDER BY department;
+
+
+SELECT 
+  r. id
+  , r.title
+  , r.salary
+  , d.title AS department
+FROM roles r
+LEFT JOIN department d ON r.department_id = d.id
+ORDER BY r.id;
 
 
 
